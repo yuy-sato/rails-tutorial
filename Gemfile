@@ -27,20 +27,14 @@ gem "stimulus-rails"
 # Build JSON APIs with ease [https://github.com/rails/jbuilder]
 gem "jbuilder"
 
+# other
 gem 'bootstrap-sass'
-
 gem "jquery-rails"
-
 gem "faker"
-
 gem "will_paginate"
-
 gem "bootstrap-will_paginate"
-
 gem "active_storage_validations"
-
 gem "image_processing"
-
 gem "mini_magick"
 
 # Use Redis adapter to run Action Cable in production
@@ -90,4 +84,6 @@ group :test do
   gem 'guard'
   gem 'guard-minitest'
   gem 'rails-controller-testing'
+  gem 'rspec-rails'
+  gem 'factory_bot_rails'
 end
