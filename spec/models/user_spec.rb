@@ -47,9 +47,22 @@ RSpec.describe User, type: :model do
     expect(dup_user).to_not be_valid
   end
 
-  describe "#authenticated?" do
-    it "return false if digest is nil" do
-      expect(user.authenticated?('')).to be_falsy
+  describe "#follow #unfollow" do
+    let(:user) { FactoryBot.create(:user) }
+    let(:other) { FactoryBot.create(:archer) }
+
+    it "should following? is true when follow" do
+      expect(user.following?(other)).to_not be_truthy
+      user.follow(other)
+      expect(other.followers.include?(user)).to be_truthy
+      expect(user.following?(other)).to be_truthy
+    end
+
+    it "should following? is false when unfollow" do
+      user.follow(other)
+      expect(user.following?(other)).to_not be_falsey
+      user.unfollow(other)
+      expect(user.following?(other)).to be_falsey
     end
   end
 end
