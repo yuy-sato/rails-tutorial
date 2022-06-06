@@ -5,7 +5,6 @@ RSpec.describe "Users", type: :request do
     let(:user) { FactoryBot.create(:user) }
 
     it "誤ったパスワードではログインできないこと" do
-      get login_path
       post login_path, params: { 
         session: { 
           email: user.email, 
@@ -16,7 +15,6 @@ RSpec.describe "Users", type: :request do
     end
 
     it "誤ったパスワードではログインした場合dangerのフラッシュメッセージがでること" do
-      get login_path
       post login_path, params: { 
         session: { 
           email: user.email, 
@@ -27,7 +25,6 @@ RSpec.describe "Users", type: :request do
     end
 
     it "正しいログイン情報でログインできること" do
-      get login_path
       post login_path, params: { 
         session: { 
           email: user.email, 
@@ -38,7 +35,6 @@ RSpec.describe "Users", type: :request do
     end
 
     it "ログアウトできること" do
-      get login_path
       post login_path, params: { 
         session: { 
           email: user.email, 
