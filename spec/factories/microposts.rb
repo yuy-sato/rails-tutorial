@@ -21,11 +21,4 @@ FactoryBot.define do
     created_at { Time.zone.now }
     user factory: :archer
   end
-   
-end
-
-def user_with_posts(posts_count: 5)
-  FactoryBot.create(:user) do |user|
-    FactoryBot.create_list(:orange, posts_count, user: user)
-  end
 end
