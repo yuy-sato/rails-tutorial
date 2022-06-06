@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe "StaticPages", type: :request do
   let(:base_title) { 'Ruby on Rails Tutorial Sample App' }
 
-  describe "#home" do
+  describe "root_path" do
     it "/へのgetリクエストが正常にレスポンスを返すこと" do
       get root_path
       expect(response).to have_http_status(200)
@@ -15,7 +15,7 @@ RSpec.describe "StaticPages", type: :request do
     end
   end
 
-  describe "#help" do
+  describe "help_path" do
     it "/helpへのgetリクエストが正常にレスポンスを返すこと" do
       get help_path
       expect(response).to have_http_status(200)
@@ -27,7 +27,7 @@ RSpec.describe "StaticPages", type: :request do
     end
   end
 
-  describe "#about" do
+  describe "about_path" do
     it "/aboutへのgetリクエストが正常にレスポンスを返すこと" do
       get about_path
       expect(response).to have_http_status(200)
@@ -39,7 +39,7 @@ RSpec.describe "StaticPages", type: :request do
     end
   end
 
-  describe "#contact" do
+  describe "contact_path" do
     it "/contactへのgetリクエストが正常にレスポンスを返すこと" do
       get contact_path
       expect(response).to have_http_status(200)

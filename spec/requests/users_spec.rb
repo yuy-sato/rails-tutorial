@@ -12,7 +12,7 @@ RSpec.describe "Users", type: :request do
           password: "invalid"
         } 
       }
-      expect(logged_in?).to_not be_truthy
+      expect(logged_in?).to_not be true
     end
 
     it "誤ったパスワードではログインした場合dangerのフラッシュメッセージがでること" do
@@ -34,7 +34,7 @@ RSpec.describe "Users", type: :request do
           password: "password"
         } 
       }
-      expect(logged_in?).to be_truthy
+      expect(logged_in?).to be true
     end
 
     it "ログアウトできること" do
@@ -45,10 +45,10 @@ RSpec.describe "Users", type: :request do
           password: "password"
         } 
       }
-      expect(logged_in?).to be_truthy
+      expect(logged_in?).to be true
 
       delete logout_path
-      expect(logged_in?).to_not be_truthy
+      expect(logged_in?).to_not be true
     end
 
   end

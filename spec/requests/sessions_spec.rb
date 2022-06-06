@@ -8,44 +8,49 @@ RSpec.describe "Sessions", type: :request do
     end
   end
 
-  # describe 'DELETE /logout' do
-  #   before do
-  #     user = FactoryBot.create(:user)
-  #     post login_path, params: { session: { email: user.email, password: user.password } }
-  #   end
+  describe 'DELETE /logout' do
+    let(:user) { FactoryBot.create(:user) }
+    
+    before do
+      log_in user
+    end
 
-  #   it 'user logged out' do
-  #     expect(logged_in?).to be_truthy
+    it 'user logged out' do
+      expect(logged_in?).to be true
  
-  #     delete logout_path
-  #     expect(logged_in?).to_not be_truthy
-  #   end
-  # end
+      delete logout_path
+      expect(logged_in?).to_not be true
+    end
+  end
 
   describe "#create" do
     let(:user) { FactoryBot.create(:user) }
 
     describe "remember me" do
-      it "if remember me is on, remember token is not empty" do
-        post login_path, params: {
-          session: {
-            email: user.email,
-            password: user.password,
-            remember_me: 1
+      context "remember me is on" do
+        it "remember token is not empty" do
+          post login_path, params: {
+            session: {
+              email: user.email,
+              password: user.password,
+              remember_me: 1
+            }
           }
-        }
-        expect(cookies[:remember_token]).to_not be_blank
+          expect(cookies[:remember_token]).to_not be_blank
+        end
       end
 
-      it "if remember me is off, remember token is empty" do
-        post login_path, params: {
-          session: {
-            email: user.email,
-            password: user.password,
-            remember_me: 0
+      context "remember me is off" do
+        it "remember token is empty" do
+          post login_path, params: {
+            session: {
+              email: user.email,
+              password: user.password,
+              remember_me: 0
+            }
           }
-        }
-        expect(cookies[:remember_token]).to be_blank
+          expect(cookies[:remember_token]).to be_blank
+        end
       end
     end
   end

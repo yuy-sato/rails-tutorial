@@ -52,17 +52,17 @@ RSpec.describe User, type: :model do
     let(:other) { FactoryBot.create(:archer) }
 
     it "should following? is true when follow" do
-      expect(user.following?(other)).to_not be_truthy
+      expect(user.following?(other)).to_not be true
       user.follow(other)
-      expect(other.followers.include?(user)).to be_truthy
-      expect(user.following?(other)).to be_truthy
+      expect(other.followers.include?(user)).to be true
+      expect(user.following?(other)).to be true
     end
 
     it "should following? is false when unfollow" do
       user.follow(other)
-      expect(user.following?(other)).to_not be_falsey
+      expect(user.following?(other)).to_not be false
       user.unfollow(other)
-      expect(user.following?(other)).to be_falsey
+      expect(user.following?(other)).to be false
     end
   end
 end

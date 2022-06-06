@@ -16,39 +16,36 @@ RSpec.describe "Microposts", type: :request do
     end
   end
 
-  describe "#destroy" do
+  describe '#destroy' do
     let(:user) { FactoryBot.create(:archer) }
-
-    before do
-      @post = FactoryBot.create(:most_recent)
-    end
-
-    context "destroy other users micropost" do
+    let!(:micropost) { FactoryBot.create(:most_recent) }
+ 
+    context '他のユーザの投稿を削除した場合' do
       before do
         log_in user
       end
-
-      it "should not delete" do
+ 
+      it '削除されないこと' do
         expect {
-          delete micropost_path(@post)
+          delete micropost_path(micropost)
         }.to_not change(Micropost, :count)
       end
-
-      it "should redirect to login page" do
-        delete micropost_path(@post)
-        expect(response).to redirect_to login_path
+ 
+      it 'ホームページにリダイレクトされること' do
+        delete micropost_path(micropost)
+        expect(response).to redirect_to root_path
       end
     end
-
-    context "not logged in" do
-      it "should not delete" do
+ 
+    context '未ログインの場合' do
+      it '削除されないこと' do
         expect {
-          delete micropost_path(@post)
+          delete micropost_path(micropost)
         }.to_not change(Micropost, :count)
       end
-
-      it "should redirect to login page" do
-        delete micropost_path(@post)
+ 
+      it 'ログインページにリダイレクトされること' do
+        delete micropost_path(micropost)
         expect(response).to redirect_to login_path
       end
     end
