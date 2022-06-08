@@ -3,6 +3,11 @@ FactoryBot.define do
     content { 'I just ate an orange!' }
     created_at { 10.minutes.ago }
   end
+  
+  factory :micropost, class: Micropost do
+    content { "hello, it's micropost!" }
+    created_at { 10.minutes.ago }
+  end
  
   factory :most_recent, class: Micropost do
     content { 'Writing a short test' }

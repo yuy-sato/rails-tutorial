@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe Micropost, type: :model do
   let(:user) { FactoryBot.create(:user) }
-  let(:micropost) { user.microposts.build(content: 'Lorem ipsum') }
+  let(:micropost) { FactoryBot.build(:micropost, content: 'Lorem ipsum', user:) }
   let(:most_recent) { FactoryBot.create(:most_recent) }
 
   it "should be valid" do
@@ -28,9 +28,7 @@ RSpec.describe Micropost, type: :model do
 
   context "並び順は投稿の新しい順になっていること" do
     before do
-      FactoryBot.create(:user) do |user|
-        FactoryBot.create_list(:orange, 5, user: user)
-      end
+      FactoryBot.create_list(:orange, 5, user:)
     end
 
     it do
@@ -38,10 +36,15 @@ RSpec.describe Micropost, type: :model do
     end
   end
 
-  it "投稿したユーザが削除された場合、そのユーザのMicropostも削除されること" do
-    user = most_recent.user
-    expect {
-      user.destroy
-    }.to change(Micropost, :count).by -1
+  context "投稿したユーザが削除された場合" do
+    before do
+      FactoryBot.create(:most_recent, user:)
+    end
+
+    it "そのユーザのMicropostも削除されること" do
+      expect {
+        user.destroy
+      }.to change(Micropost, :count).by -1
+    end
   end
 end
