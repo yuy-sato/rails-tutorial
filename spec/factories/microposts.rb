@@ -3,6 +3,11 @@ FactoryBot.define do
     content { 'I just ate an orange!' }
     created_at { 10.minutes.ago }
   end
+  
+  factory :micropost, class: Micropost do
+    content { "hello, it's micropost!" }
+    created_at { 10.minutes.ago }
+  end
  
   factory :most_recent, class: Micropost do
     content { 'Writing a short test' }
@@ -20,12 +25,5 @@ FactoryBot.define do
     content { 'Posted by Archer' }
     created_at { Time.zone.now }
     user factory: :archer
-  end
-   
-end
-
-def user_with_posts(posts_count: 5)
-  FactoryBot.create(:user) do |user|
-    FactoryBot.create_list(:orange, posts_count, user: user)
   end
 end
